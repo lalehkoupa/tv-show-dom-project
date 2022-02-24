@@ -1,3 +1,84 @@
 #root {
-  color: red;
+  display: flex;
+  flex-direction: column;
+  /*width: 100vw;
+  height: 100vh;*/
+}
+body {
+  background-color: rgb(230, 230, 230);
+}
+
+.episodList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.episode {
+  width: 27%;
+  background-color: white;
+  margin: 0 1.3rem 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.episodeTitle {
+  border: solid 2px rgb(167, 164, 164);
+  border-radius: 0.3rem;
+  text-align: center;
+  width: 23.2vw;
+  font-size: 20px;
+  padding: 1rem 1.3rem;
+  font-weight: 400;
+  margin: 0 0 1.5rem;
+}
+
+.episodeImg {
+  max-width: 180px;
+}
+
+.episodeSummary {
+  color: rgb(124, 122, 122);
+  padding: 1.7rem;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+
+  /*margin: 0.3rem 1rem 1.1rem 3.3rem;*/
+}
+.searchBox {
+  width: 250px;
+  height: 50px;
+  margin-right: 1.5rem;
+  margin-left: 2.5rem;
+}
+
+.searchCount {
+  font-size: 22px;
+  color: rgb(143, 141, 141);
+  margin-top: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.siteContainer {
+  text-align: center;
+}
+
+.episodeSelection {
+  height: 50px;
+  margin-left: 2.8rem;
+  margin-right: 3.3rem;
 }

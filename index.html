@@ -9,10 +9,24 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="search">
+        <select id="episodeSelection" class="episodeSelection">
+          <option value="00">Show All episodes</option>
+        </select>
+        <input type="search" id="searchBox" class="searchBox" />
+        <p id="searchCount" class="searchCount"></p>
+      </div>
+      <div id="container" class="episodList"></div>
+      <div class="siteContainer">
+        All data come from
+        <a href="http://TVMaze.com" class="site" target="blank">TVMaze.com</a>
+      </div>
+    </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
+    <script src="shows.js"></script>
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
