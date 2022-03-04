@@ -11,10 +11,15 @@
   <body>
     <div id="root">
       <div class="search">
-        <select id="episodeSelection" class="episodeSelection">
-          <option value="00">Show All episodes</option>
-        </select>
-        <input type="search" id="searchBox" class="searchBox" />
+        <p>shows :</p>
+        <select id="showSelection" class="showSelection"></select>
+        <select id="episodeSelection" class="episodeSelection"></select>
+        <input
+          type="search"
+          id="searchBox"
+          placeholder="Search keyword..."
+          class="searchBox"
+        />
         <p id="searchCount" class="searchCount"></p>
       </div>
       <div id="container" class="episodList"></div>
