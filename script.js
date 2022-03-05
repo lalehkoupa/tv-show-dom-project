@@ -67,7 +67,8 @@ const search = (event) => {
 const makePageForEpisodes = (episodeList) => {
   const container = document.getElementById("container");
   container.innerHTML = "";
-
+  //console.log(typeof episodeList);
+  //if (episodeList && typeof episodeList === "array") {
   episodeList.forEach((episode) => {
     //function for formatting the episode title in a page
     const formatEpisodeTitle = () => {
@@ -96,18 +97,30 @@ const makePageForEpisodes = (episodeList) => {
       episodeImg.src = episode.image.medium;
     }
   });
+  // }
 };
 
 //Get episodes data from API
 const sendRequest = (showId) => {
   let url = `https://api.tvmaze.com/shows/${showId}/episodes`;
   return fetch(url)
-    .then((response) => response.json())
+    .then((response) => {
+      //for some data from API we receive code status 404 and dont have appropriate data
+      //so I used this if else for the response to manage the error
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("problem to get data from API");
+      }
+    })
     .then((data) => {
-      console.log(data);
       return data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const container = document.getElementById("container");
+      container.innerHTML = "There is no information for this show";
+      console.log(err);
+    });
 };
 
 //fill show dropdownlist
