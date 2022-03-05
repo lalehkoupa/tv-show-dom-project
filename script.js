@@ -92,7 +92,9 @@ const makePageForEpisodes = (episodeList) => {
 
     episodeTitle.innerText = formatEpisodeTitle();
     episodeSummary.innerHTML = episode.summary;
-    episodeImg.src = episode.image.medium;
+    if (episode.image !== null) {
+      episodeImg.src = episode.image.medium;
+    }
   });
 };
 
@@ -101,7 +103,10 @@ const sendRequest = (showId) => {
   let url = `https://api.tvmaze.com/shows/${showId}/episodes`;
   return fetch(url)
     .then((response) => response.json())
-    .then((data) => data)
+    .then((data) => {
+      console.log(data);
+      return data;
+    })
     .catch((err) => console.log(err));
 };
 
