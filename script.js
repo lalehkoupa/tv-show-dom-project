@@ -1,3 +1,6 @@
+let allEpisodes;
+let episodeOptionEl;
+
 const setup = () => {
   const allShows = getAllShows();
   fillUpShowSelection(allShows);
@@ -16,7 +19,7 @@ const setup = () => {
 
 const showSelectedShow = (event) => {
   const showId = event.target.value;
-  let allEpisodes = [];
+  searchBox.value = "";
   sendRequest(showId).then((data) => {
     allEpisodes = data;
     fillUpEpisodeSelection(allEpisodes);
@@ -27,48 +30,39 @@ const showSelectedShow = (event) => {
 //function will call when user change the dropdown list value
 const showSelectedEpisode = (event) => {
   const episodeId = event.target.value;
-  let allEpisodes;
-  const showId = showSelection.value;
-  sendRequest(showId).then((data) => {
-    allEpisodes = data;
-    if (episodeId === "SHOW_ALL_EPISODES") {
-      makePageForEpisodes(allEpisodes);
-      searchCount.innerText = `Displaying ${allEpisodes.length} / ${allEpisodes.length} episodes`;
-    } else {
-      const filterEpisode = allEpisodes.filter(
-        (episode) => episode.id == episodeId
-      );
+  searchBox.value = "";
+  if (episodeId === "SHOW_ALL_EPISODES") {
+    makePageForEpisodes(allEpisodes);
+    searchCount.innerText = `Displaying ${allEpisodes.length} / ${allEpisodes.length} episodes`;
+  } else {
+    const filterEpisode = allEpisodes.filter(
+      (episode) => episode.id == episodeId
+    );
 
-      makePageForEpisodes(filterEpisode);
-
-      searchCount.innerText = `Displaying ${filterEpisode.length} / ${allEpisodes.length} episodes`;
-    }
-  });
+    makePageForEpisodes(filterEpisode);
+    searchCount.innerText = `Displaying ${filterEpisode.length} / ${allEpisodes.length} episodes`;
+  }
 };
 
 //function will call when user start typing in a search box
 const search = (event) => {
   const searchWord = event.target.value.toLowerCase();
-  let allEpisodes;
-  const showId = showSelection.value;
-  sendRequest(showId).then((data) => {
-    allEpisodes = data;
-    const filterEpisode = allEpisodes.filter(
-      (episode) =>
-        episode.name.toLowerCase().includes(searchWord) ||
-        episode.summary.toLowerCase().includes(searchWord)
-    );
-    const searchCount = document.getElementById("searchCount");
-    searchCount.innerText = `Displaying ${filterEpisode.length} / ${allEpisodes.length} episodes`;
-    makePageForEpisodes(filterEpisode);
-  });
+  const filterEpisode = allEpisodes.filter(
+    (episode) =>
+      episode.name.toLowerCase().includes(searchWord) ||
+      episode.summary.toLowerCase().includes(searchWord)
+  );
+  const searchCount = document.getElementById("searchCount");
+  searchCount.innerText = `Displaying ${filterEpisode.length} / ${allEpisodes.length} episodes`;
+
+  episodeOptionEl.value = "SHOW_ALL_EPISODES";
+  console.log(episodeOptionEl.value);
+  makePageForEpisodes(filterEpisode);
 };
 
 const makePageForEpisodes = (episodeList) => {
   const container = document.getElementById("container");
   container.innerHTML = "";
-  //console.log(typeof episodeList);
-  //if (episodeList && typeof episodeList === "array") {
   episodeList.forEach((episode) => {
     //function for formatting the episode title in a page
     const formatEpisodeTitle = () => {
@@ -138,7 +132,9 @@ const fillUpShowSelection = (shows) => {
   //get the the first show in the show dropdownlist to fill up the episode dropdownlist of that show.
   let showId = showSelectEl.firstChild.value;
   sendRequest(showId).then((data) => {
-    const allEpisodes = data;
+    //const allEpisodes = data;
+    allEpisodes = data;
+
     fillUpEpisodeSelection(allEpisodes);
     makePageForEpisodes(allEpisodes);
   });
@@ -148,7 +144,7 @@ const fillUpShowSelection = (shows) => {
 const fillUpEpisodeSelection = (episodes) => {
   const episodeSelectEl = document.getElementById("episodeSelection");
   episodeSelectEl.innerHTML = "";
-  let episodeOptionEl = document.createElement("option");
+  episodeOptionEl = document.createElement("option");
   episodeOptionEl.value = "SHOW_ALL_EPISODES";
   episodeOptionEl.text = "All episodes";
   episodeSelectEl.appendChild(episodeOptionEl);
