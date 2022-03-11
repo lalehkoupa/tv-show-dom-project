@@ -1,3 +1,150 @@
-#root {
-  color: red;
+.episodeContainer {
+  display: flex;
+  flex-direction: column;
+}
+body {
+  background-color: rgb(228, 222, 222);
+}
+
+.episodList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.episode {
+  width: 27%;
+  background-color: white;
+  margin: 0 1.3rem 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.episodeTitle {
+  border-radius: 0.3rem;
+  text-align: center;
+  width: 23.1vw;
+  font-size: 20px;
+  padding: 1rem 1.3rem;
+  font-weight: 400;
+  margin: 0 0 1.5rem;
+}
+
+.episodeImg {
+  max-width: 180px;
+}
+
+.episodeSummary {
+  color: rgb(124, 122, 122);
+  padding: 1.7rem;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5rem;
+
+  /*margin: 0.3rem 1rem 1.1rem 3.3rem;*/
+}
+.searchBox {
+  width: 250px;
+  height: 50px;
+  margin-right: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+.searchCount {
+  font-size: 18px;
+  color: rgb(143, 141, 141);
+  margin-top: 0.7rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.siteContainer {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.episodeSelection {
+  height: 50px;
+  margin-left: 1.8rem;
+  margin-right: 2.2rem;
+}
+
+.showNameHeader {
+  height: 50px;
+  margin-left: 0.5rem;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.showOtherDetail {
+  width: 20%;
+  border: 1px solid lightgrey;
+  padding-left: 1.9rem;
+}
+
+.showSummary {
+  width: 60%;
+  padding: 0 2rem;
+}
+
+.showImg {
+  width: 10%;
+  height: 180px;
+}
+
+.showDiv {
+  width: 100%;
+  border: 2px solid rgb(224, 221, 221);
+  box-shadow: 2px 2px #ecebeb;
+  background-color: rgb(243, 237, 237);
+  margin: 0.6rem 0;
+}
+
+.showDetail {
+  padding: 1.2rem 1.5rem;
+}
+
+.showNameEl {
+  padding-left: 1.1rem;
+}
+
+.showNameEl:hover {
+  cursor: pointer;
+}
+
+.resetPage {
+  padding-left: 2rem;
+  font-size: 18px;
+  color: rgb(80, 78, 78);
+  margin-top: 0.7rem;
+}
+
+.resetPage:hover {
+  cursor: pointer;
+}
+
+.searchShows {
+  display: flex;
+  justify-content: space-around;
+  width: 620px;
 }

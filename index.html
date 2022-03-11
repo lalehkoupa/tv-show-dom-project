@@ -3,17 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Laleh Koupaei (Lalehkoupa)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="root">
+    <div id="episodes" class="episodeContainer">
+      <div class="search">
+        <p>show :</p>
+        <p id="showName" class="showName"></p>
+        <select id="episodeSelection" class="episodeSelection"></select>
+        <input
+          type="search"
+          id="searchBox"
+          placeholder="Search keyword..."
+          class="searchBox"
+        />
+        <p id="searchCount" class="searchCount"></p>
+        <p id="resetPage" class="resetPage">Return to all shows</p>
+      </div>
+      <div id="container" class="episodList"></div>
+      <div class="siteContainer">
+        All data come from
+        <a href="http://TVMaze.com" class="site" target="blank">TVMaze.com</a>
+      </div>
+    </div>
+    <div id="shows">
+      <div class="searchShows">
+        <p>Filtering for</p>
+        <input type="search" id="searchAllSHows" />
+        <p id="searchShowCount" class="searchCount"></p>
+        <select></select>
+      </div>
+      <div id="showsContainer"></div>
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
+    <script src="shows.js"></script>
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
