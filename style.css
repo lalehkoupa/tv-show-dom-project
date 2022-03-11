@@ -1,8 +1,6 @@
-#root {
+.episodeContainer {
   display: flex;
   flex-direction: column;
-  /*width: 100vw;
-  height: 100vh;*/
 }
 body {
   background-color: rgb(228, 222, 222);
@@ -61,7 +59,7 @@ body {
 .searchCount {
   font-size: 18px;
   color: rgb(143, 141, 141);
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
 }
 
 a {
@@ -84,7 +82,69 @@ a:hover {
   margin-right: 2.2rem;
 }
 
-.showSelection {
+.showNameHeader {
   height: 50px;
   margin-left: 0.5rem;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.showOtherDetail {
+  width: 20%;
+  border: 1px solid lightgrey;
+  padding-left: 1.9rem;
+}
+
+.showSummary {
+  width: 60%;
+  padding: 0 2rem;
+}
+
+.showImg {
+  width: 10%;
+  height: 180px;
+}
+
+.showDiv {
+  width: 100%;
+  border: 2px solid rgb(224, 221, 221);
+  box-shadow: 2px 2px #ecebeb;
+  background-color: rgb(243, 237, 237);
+  margin: 0.6rem 0;
+}
+
+.showDetail {
+  padding: 1.2rem 1.5rem;
+}
+
+.showNameEl {
+  padding-left: 1.1rem;
+}
+
+.showNameEl:hover {
+  cursor: pointer;
+}
+
+.resetPage {
+  padding-left: 2rem;
+  font-size: 18px;
+  color: rgb(80, 78, 78);
+  margin-top: 0.7rem;
+}
+
+.resetPage:hover {
+  cursor: pointer;
+}
+
+.searchShows {
+  display: flex;
+  justify-content: space-around;
+  width: 620px;
 }
