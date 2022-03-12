@@ -46,6 +46,7 @@ body {
   display: flex;
   flex-direction: row;
   margin-bottom: 0.5rem;
+  font-size: 18px;
 
   /*margin: 0.3rem 1rem 1.1rem 3.3rem;*/
 }
@@ -98,13 +99,16 @@ a:hover {
 
 .showOtherDetail {
   width: 20%;
-  border: 1px solid lightgrey;
+  border: 2px solid lightgrey;
   padding-left: 1.9rem;
+  border-radius: 1rem;
 }
 
 .showSummary {
   width: 60%;
   padding: 0 2rem;
+  color: black;
+  font-size: 18px;
 }
 
 .showImg {
@@ -114,10 +118,11 @@ a:hover {
 
 .showDiv {
   width: 100%;
-  border: 2px solid rgb(224, 221, 221);
+  border: 3px solid rgb(224, 221, 221);
   box-shadow: 2px 2px #ecebeb;
   background-color: rgb(243, 237, 237);
   margin: 0.6rem 0;
+  border-radius: 2rem;
 }
 
 .showDetail {
@@ -145,6 +150,10 @@ a:hover {
 
 .searchShows {
   display: flex;
-  justify-content: space-around;
-  width: 620px;
+  font-size: 18px;
+  justify-content: center;
+}
+
+.showContainer {
+  padding: 1.5rem 2.5rem;
 }

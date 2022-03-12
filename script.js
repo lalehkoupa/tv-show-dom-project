@@ -5,12 +5,14 @@ const EPISODES_CONTAINER = document.getElementById("episodes");
 const SHOWS_CONTAINER = document.getElementById("shows");
 const SEARCH_BOX_ALL_SHOW = document.getElementById("searchAllSHows");
 const SEARCH_SHOW_COUNT = document.getElementById("searchShowCount");
+const SHOWS_SELECT_EL = document.getElementById("showsSelect");
 
 let currentEpisodes;
 let allShows;
 
 const setup = () => {
   allShows = getAllShows();
+  fillUpShowsSelection(allShows);
   makePageForShows(allShows);
 
   //whenever we type a letter in a search box
@@ -19,6 +21,9 @@ const setup = () => {
   const episodeSelection = document.getElementById("episodeSelection");
   //whenever we change the dropdown list
   episodeSelection.addEventListener("change", showSelectedEpisode);
+
+  //whenever we change the dropdown list
+  SHOWS_SELECT_EL.addEventListener("change", showSelectedShows);
 
   const resetPage = document.getElementById("resetPage");
   resetPage.addEventListener("click", reset);
@@ -29,18 +34,60 @@ const setup = () => {
 const reset = () => {
   SHOWS_CONTAINER.style.display = "block";
   EPISODES_CONTAINER.style.display = "none";
+  SEARCH_BOX_ALL_SHOW.value = "";
+  SHOWS_SELECT_EL.value = "SHOW_ALL_SHOWS";
+  makePageForShows(allShows);
 };
 
-// const showSelectedShow = (event) => {
-//   const showId = event.target.value;
-//   SEARCH_BOX.value = "";
-//   sendRequest(showId).then((data) => {
-//     currentEpisodes = data;
-//     fillUpEpisodeSelection(currentEpisodes);
-//     makePageForEpisodes(currentEpisodes);
-//   });
-// };
+const fillUpShowsSelection = (shows) => {
+  // const showId = event.target.value;
+  // SEARCH_BOX.value = "";
+  // sendRequest(showId).then((data) => {
+  //   currentEpisodes = data;
+  //   fillUpEpisodeSelection(currentEpisodes);
+  //   makePageForEpisodes(currentEpisodes);
+  // });
 
+  SHOWS_SELECT_EL.innerHTML = "";
+  let showOptionEl = document.createElement("option");
+  showOptionEl.value = "SHOW_ALL_SHOWS";
+  showOptionEl.text = "All shows";
+  SHOWS_SELECT_EL.appendChild(showOptionEl);
+
+  // const showSelectEl = document.getElementById("showSelection");
+  // shows.forEach((show) => {
+  //   const showOptionEl = document.createElement("option");
+  //   showOptionEl.value = show.id;
+  //   showOptionEl.text = show.name;
+  //   showSelectEl.appendChild(showOptionEl);
+  // });
+  // //get the the first show in the show dropdownlist to fill up the episode dropdownlist of that show.
+  // let showId = showSelectEl.firstChild.value;
+  shows.forEach((show) => {
+    showOptionEl = document.createElement("option");
+    showOptionEl.value = show.id;
+    showOptionEl.text = show.name;
+    SHOWS_SELECT_EL.appendChild(showOptionEl);
+  });
+};
+
+const showSelectedShows = (event) => {
+  const showId = event.target.value;
+
+  SHOWS_CONTAINER.style.display = "none";
+  EPISODES_CONTAINER.style.display = "block";
+
+  sendRequest(showId).then((data) => {
+    currentEpisodes = data;
+
+    makePageForEpisodes(currentEpisodes);
+    fillUpEpisodeSelection(currentEpisodes);
+    // const showName = document.getElementById("showName");
+    // showName.innerText = show.name;
+    // showName.classList.add("showNameHeader");
+  });
+  window.scrollTo(0, 0);
+};
 //function will call when user change the dropdown list value
 const showSelectedEpisode = (event) => {
   const episodeId = event.target.value;
@@ -83,10 +130,12 @@ const searchAllShows = (event) => {
     (show) =>
       show.name.toLowerCase().includes(searchWord) ||
       show.summary.toLowerCase().includes(searchWord) ||
-      show.genres.toLowerCase().includes(searchWord)
+      show.genres.forEach((genre) => genre.toLowerCase().includes(searchWord))
   );
   SEARCH_SHOW_COUNT.innerText = `Found ${filterShows.length} shows`;
   makePageForShows(filterShows);
+  fillUpShowsSelection(filterShows);
+  //showFilteredShow(filterShows);
 };
 
 const makePageForEpisodes = (episodeList) => {
@@ -153,7 +202,7 @@ const makePageForShows = (shows) => {
   shows.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
   let showsContainer = document.getElementById("showsContainer");
   showsContainer.innerHTML = "";
-
+  SEARCH_SHOW_COUNT.innerText = `Found ${shows.length} shows`;
   //showDivEl.innerHTML = "";
   // const showSelectEl = document.getElementById("showSelection");
   // shows.forEach((show) => {
@@ -219,7 +268,7 @@ const makePageForShows = (shows) => {
     showDetailDivEl.append(showImgEl, showSummaryEl, showOtherDetailEl);
 
     showDivEl.append(showNameEl, showDetailDivEl);
-    SHOWS_CONTAINER.appendChild(showDivEl);
+    //SHOWS_CONTAINER.appendChild(showDivEl);
 
     showNameEl.innerText = show.name;
     if (show.image !== null) {
@@ -245,11 +294,11 @@ const makePageForShows = (shows) => {
     showRuntimeEl.innerText = show.runtime;
 
     showNameEl.addEventListener("click", () => {
+      SHOWS_CONTAINER.style.display = "none";
+      EPISODES_CONTAINER.style.display = "block";
       const showId = show.id;
       sendRequest(showId).then((data) => {
         currentEpisodes = data;
-        SHOWS_CONTAINER.style.display = "none";
-        EPISODES_CONTAINER.style.display = "block";
 
         makePageForEpisodes(currentEpisodes);
         fillUpEpisodeSelection(currentEpisodes);
@@ -257,6 +306,7 @@ const makePageForShows = (shows) => {
         showName.innerText = show.name;
         showName.classList.add("showNameHeader");
       });
+      window.scrollTo(0, 0);
     });
   });
 };
